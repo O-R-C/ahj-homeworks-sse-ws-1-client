@@ -17,6 +17,7 @@ import getClasses from './getClasses.js'
  * @property {string=} type - The type of a form element.
  * @property {string=} action - The URL of a form's action.
  * @property {string=} target - The target of a link.
+ * @property {string=} method - The HTTP method of a form.
  * @property {string=} download - The download attribute of a link.
  * @property {string=} title - The title of an element.
  * @property {boolean=} hidden - Whether the element is hidden.
@@ -36,15 +37,17 @@ import getClasses from './getClasses.js'
  * @return {HTMLElement} The created HTML element.
  */
 export const getElement = (props) => {
-  const { classes, tag, data, ...rest } = props
+  const { classes, tag, data, textContent, ...rest } = props
 
   const element = document.createElement(tag)
   element.classList.add(...getClasses(classes))
 
   const restProps = Object.keys(rest)
-  restProps.length && restProps.forEach((key) => (element[key] = rest[key]))
+  restProps.length && restProps.forEach((key) => element.setAttribute(key, rest[key]))
 
   data && Object.keys(data).forEach((key) => (element.dataset[key] = data[key]))
+
+  textContent && (element.textContent = textContent)
 
   return element
 }
