@@ -2,31 +2,42 @@
 @value colorMain, colorSecondary, padding, radius, border, shadow from values;
 
 .register-form {
-  max-width: 400px;
+  width: 400px;
   padding: padding;
 
-  border: border;
-  border-radius: radius;
-
-  box-shadow: shadow;
-  background-color: colorSecondary;
-  color: colorMain;
+  display: flex;
+  flex-direction: column;
+  gap: padding;
 }
 
 .register-form label {
   display: block;
+  text-align: center;
+
+  font-size: 1.2rem;
 }
 
 .register-form input {
-  display: block;
   width: 100%;
-  margin-bottom: 10px;
+  display: block;
+
+  font-size: 1rem;
+  padding: calc(padding / 2) padding;
 }
 
 .register-form button {
-  width: 100%;
+  width: 70%;
+  padding: calc(padding / 2);
+  align-self: center;
+
+  border: border;
+  border-radius: calc(radius * 2);
+  background-color: transparent;
+
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .register-form button:hover {
-  background-color: colorMain;
+  color: black;
 }

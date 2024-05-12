@@ -1,0 +1,19 @@
+@value values: '@css/variables.module.css';
+@value colorMain, colorSecondary, padding, radius, border, shadow from values;
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: padding;
+  padding: padding;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.register-dialog {
+  padding: padding;
+
+  border: border;
+  border-radius: radius;
+  box-shadow: shadow;
+}

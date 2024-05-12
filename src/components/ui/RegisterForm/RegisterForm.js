@@ -1,9 +1,15 @@
 import getElement from '@/js/getElement'
 import styles from './RegisterForm.module.css'
 
+/**
+ * Creates a registration form with a label, input field, and submit button.
+ *
+ * @return {HTMLFormElement} The registration form element.
+ */
 export const RegisterForm = () => {
   const form = getElement({
     tag: 'form',
+    name: 'register',
     method: 'dialog',
     classes: styles['register-form'],
   })
@@ -20,6 +26,8 @@ export const RegisterForm = () => {
     name: 'username',
     id: 'register-username',
     placeholder: 'Псевдоним',
+    required: true,
+    autofocus: true,
   })
 
   const submit = getElement({
