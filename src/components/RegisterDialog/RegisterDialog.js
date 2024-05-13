@@ -5,6 +5,7 @@ import RegisterDialogUI from './RegisterDialogUI'
  */
 export default class RegisterDialog {
   #ui
+  #users
 
   /**
    * Constructs a new instance of the class.
@@ -32,6 +33,7 @@ export default class RegisterDialog {
   #addListeners() {
     this.#ui.app.addEventListener('submit', this.#onSubmit)
     this.#ui.app.addEventListener('keydown', this.#onKeydown)
+    document.addEventListener('loadedUsers', this.#onLoadedUsers)
   }
 
   /**
@@ -50,7 +52,16 @@ export default class RegisterDialog {
       return
     }
 
-    this.#fireSendUsername(new FormData(event.target))
+    if (this.#users.has(username)) {
+      this.#ui.showDuplicateUsernameError()
+      return
+    }
+
+    this.#success(username)
+  }
+
+  #success = (username) => {
+    this.#fireSendUsername(username)
     this.#ui.resetUsername()
     this.#ui.hideModal()
   }
@@ -82,25 +93,23 @@ export default class RegisterDialog {
   /**
    * Gets the send username event.
    *
-   * @param {FormData} formData - The form data.
+   * @param {string} username - username.
    * @return {CustomEvent} The send username event.
    */
-  #getSendUsernameEvent(formData) {
+  #getSendUsernameEvent(username) {
     return new CustomEvent('sendUsername', {
-      detail: {
-        formData,
-      },
+      detail: username,
     })
   }
 
   /**
    * Fires the send username event.
    *
-   * @param {FormData} formData - The form data.
+   * @param {string} username - username.
    * @return {void} No return value.
    */
-  #fireSendUsername(formData) {
-    document.dispatchEvent(this.#getSendUsernameEvent(formData))
+  #fireSendUsername(username) {
+    document.dispatchEvent(this.#getSendUsernameEvent(username))
   }
 
   /**
@@ -110,5 +119,9 @@ export default class RegisterDialog {
    */
   #getTrimmedUsername() {
     return this.#ui.inputUserName.value.trim()
+  }
+
+  #onLoadedUsers = ({ detail }) => {
+    this.#users = new Set(detail)
   }
 }

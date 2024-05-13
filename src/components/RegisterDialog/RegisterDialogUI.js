@@ -48,16 +48,34 @@ export default class RegisterDialogUI extends BaseUI {
     this.app.close()
   }
 
+  /**
+   * Shows an error message for an empty username input.
+   *
+   * @return {void} No return value.
+   */
   showEmptyUsernameError() {
     this.resetUsername()
     this.inputUserName.setCustomValidity('Псевдоним не может быть пустой строкой')
     this.inputUserName.reportValidity()
   }
 
+  /**
+   * Hides the error message for an empty username by resetting the custom validity of the input element.
+   *
+   * This function sets the custom validity of the input element with the id 'inputUserName' to an empty string,
+   * effectively hiding the error message for an empty username.
+   *
+   * @return {void} This function does not return anything.
+   */
   hideEmptyUsernameError() {
     this.inputUserName.setCustomValidity('')
   }
 
+  /**
+   * Resets the value of the inputUserName field to an empty string.
+   *
+   * @return {void} No return value.
+   */
   resetUsername() {
     this.inputUserName.value = ''
   }

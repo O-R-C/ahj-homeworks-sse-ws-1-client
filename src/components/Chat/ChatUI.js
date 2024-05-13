@@ -47,4 +47,9 @@ export default class ChatUI extends BaseUI {
   showRegisterDialog() {
     this.registerDialog.showModal()
   }
+
+  updateUsers(users) {
+    console.log('🚀 ~ users:', users)
+    console.log('🚀 ~ users:', Array.isArray(users))
+  }
 }
