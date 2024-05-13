@@ -34,20 +34,16 @@ export default class Chat {
 
   #onMessageWs = ({ data }) => {
     const { event, payload } = JSON.parse(data)
-    console.log('🚀 ~ event:', event)
-    console.log('🚀 ~ payload:', payload)
 
-    const handler = `handle${event}`
-
-    console.log('🚀 ~ handler:', handler)
-    if (!this[handler]) return
-
-    this[handler](payload)
+    this.#eventHandlers[event] && this.#eventHandlers[event](payload)
   }
 
-  handleUsersList = (usersList) => {
-    console.log('🚀 ~ usersList:', Array.isArray(usersList))
+  #eventHandlers = {
+    UsersList: (usersList) => this.#handleUsersList(usersList),
+    Chat: (chat) => this.#handleChat(chat),
+  }
 
+  #handleUsersList = (usersList) => {
     if (!this.#users) {
       setTimeout(() => {
         this.#fireLoadedUsers()
@@ -59,7 +55,7 @@ export default class Chat {
     }
   }
 
-  handleChat = (chat) => {
+  #handleChat = (chat) => {
     console.log('🚀 ~ message:', chat)
   }
 
@@ -84,9 +80,8 @@ export default class Chat {
    * @param {CustomEvent} event - The send username event.
    * @return {void} No return value.
    */
-
   #onSendUsername = ({ detail }) => {
-    this.#ws.send(JSON.stringify({ username: detail }))
+    this.#ws.send(JSON.stringify({ event: 'UserJoin', payload: detail }))
   }
 
   #getLoadedUsers() {

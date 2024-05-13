@@ -34,7 +34,7 @@
 
 .register-form button {
   width: 70%;
-  padding: calc(padding / 2);
+  padding: padding;
   align-self: center;
 
   border: border;
