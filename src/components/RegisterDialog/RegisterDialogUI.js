@@ -12,7 +12,9 @@ export default class RegisterDialogUI extends BaseUI {
 
   #init() {
     this.inputUserName = this.app.querySelector('input[name="username"]')
+    this.errorUserName = this.app.querySelector('div[class^="error-message"]')
   }
+
   /**
    * Creates the app element.
    *
@@ -55,20 +57,17 @@ export default class RegisterDialogUI extends BaseUI {
    */
   showEmptyUsernameError() {
     this.resetUsername()
-    this.inputUserName.setCustomValidity('Псевдоним не может быть пустой строкой')
-    this.inputUserName.reportValidity()
+
+    this.errorUserName.textContent = 'Псевдоним не может быть пустой строкой'
   }
 
   /**
-   * Hides the error message for an empty username by resetting the custom validity of the input element.
+   * Hides the custom error message for the inputUserName field.
    *
-   * This function sets the custom validity of the input element with the id 'inputUserName' to an empty string,
-   * effectively hiding the error message for an empty username.
-   *
-   * @return {void} This function does not return anything.
+   * @return {void} No return value.
    */
-  hideEmptyUsernameError() {
-    this.inputUserName.setCustomValidity('')
+  hideCustomError() {
+    this.errorUserName.textContent = ''
   }
 
   /**
@@ -78,5 +77,16 @@ export default class RegisterDialogUI extends BaseUI {
    */
   resetUsername() {
     this.inputUserName.value = ''
+    this.inputUserName.focus()
+  }
+
+  /**
+   * Shows an error message for a duplicate username input.
+   *
+   * @return {void} No return value
+   */
+  showDuplicateUsernameError() {
+    this.errorUserName.textContent = 'Пользователь с таким псевдонимом уже зарегистрирован'
+    this.inputUserName.focus()
   }
 }

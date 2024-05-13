@@ -7,7 +7,12 @@
 
   display: flex;
   flex-direction: column;
-  gap: padding;
+  gap: calc(padding * 2);
+}
+
+.register-form[required] {
+  margin-top: 40px !important;
+  margin-left: 100px !important;
 }
 
 .register-form label {
@@ -23,6 +28,8 @@
 
   font-size: 1rem;
   padding: calc(padding / 2) padding;
+
+  border: border;
 }
 
 .register-form button {
@@ -40,4 +47,15 @@
 
 .register-form button:hover {
   color: black;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: calc(padding / 2);
+}
+
+.error-message {
+  min-height: 20px;
+  color: rgba(255, 0, 0, 0.7);
 }

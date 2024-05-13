@@ -20,13 +20,22 @@ export const RegisterForm = () => {
     textContent: 'Выберите псевдоним',
   })
 
+  const inputWrapper = getElement({
+    tag: 'div',
+    classes: styles['input-wrapper'],
+  })
+
+  const errorMessage = getElement({
+    tag: 'div',
+    classes: styles['error-message'],
+  })
+
   const input = getElement({
     tag: 'input',
     type: 'text',
     name: 'username',
     id: 'register-username',
     placeholder: 'Псевдоним',
-    required: true,
     autofocus: true,
   })
 
@@ -37,7 +46,8 @@ export const RegisterForm = () => {
     textContent: 'Продолжить',
   })
 
-  form.append(label, input, submit)
+  inputWrapper.append(input, errorMessage)
+  form.append(label, inputWrapper, submit)
 
   return form
 }

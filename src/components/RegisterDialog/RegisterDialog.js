@@ -77,7 +77,7 @@ export default class RegisterDialog {
       event.preventDefault()
     }
 
-    this.#ui.hideEmptyUsernameError()
+    this.#ui.hideCustomError()
     return
   }
 
