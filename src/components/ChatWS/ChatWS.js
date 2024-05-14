@@ -1,4 +1,4 @@
-import ChatUI from './ChatUI'
+import ChatWSUI from './ChatWSUI'
 import firesEvent from '@/js/firesEvent'
 
 /**
@@ -6,7 +6,7 @@ import firesEvent from '@/js/firesEvent'
  *
  * @class Chat
  */
-export default class Chat {
+export default class ChatWS {
   #ui
   #ws
   #users = null
@@ -14,7 +14,7 @@ export default class Chat {
   constructor(element, ServerApi) {
     !ServerApi && this.#throwError('Server API is not provided')
 
-    this.#ui = new ChatUI(element)
+    this.#ui = new ChatWSUI(element)
     this.#ws = new ServerApi('ws://localhost:3000/chat')
 
     this.#init()

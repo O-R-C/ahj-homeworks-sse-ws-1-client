@@ -1,6 +1,6 @@
 import setTitle from './setTitle'
-import Chat from '@/components/Chat/Chat'
+import ChatWS from '@/components/ChatWS/ChatWS'
 import ServerApi from './Classes/ServerApi'
 
 setTitle('Chat')
-new Chat('body', ServerApi)
+new ChatWS('body', ServerApi)

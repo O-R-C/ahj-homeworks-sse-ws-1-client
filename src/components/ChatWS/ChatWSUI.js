@@ -2,14 +2,14 @@ import BaseUI from '@/js/Classes/BaseUI'
 import getElement from '@/js/getElement'
 import RegisterDialog from '../RegisterDialog/RegisterDialog'
 
-import styles from './Chat.module.css'
+import styles from './ChatWS.module.css'
 
 /**
  * Class represents a Chat UI
  *
  * @class ChatUI
  */
-export default class ChatUI extends BaseUI {
+export default class ChatWSUI extends BaseUI {
   /**
    * Constructs a new instance of the class.
    *
