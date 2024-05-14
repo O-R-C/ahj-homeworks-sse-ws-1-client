@@ -1,52 +1,34 @@
 import ChatUI from './ChatUI'
+import firesEvent from '@/js/firesEvent'
 
 export default class Chat {
   #ui
   #ws
   #users = null
-  #usersLoaded = false
 
-  constructor(element) {
+  constructor(element, ServerApi) {
+    !ServerApi && this.#throwError('Server API is not provided')
+
     this.#ui = new ChatUI(element)
-    this.#ws = new WebSocket('ws://localhost:3000/chat')
+    this.#ws = new ServerApi('ws://localhost:3000/chat')
 
     this.#init()
   }
 
   #init() {
+    this.#ws.init()
     this.#addListeners()
   }
 
   #addListeners() {
-    document.addEventListener('sendUsername', this.#onSendUsername)
-    this.#ws.addEventListener('open', this.#onOpenWs)
-    this.#ws.addEventListener('close', this.#onCloseWs)
-    this.#ws.addEventListener('message', this.#onMessageWs)
+    document.addEventListener('registerUser', this.#handleRegisterUser)
+    document.addEventListener('loadedUserList', this.#handleUsersList)
   }
 
-  #onOpenWs = () => {
-    return
-  }
-
-  #onCloseWs = (event) => {
-    console.log('🚀 ~ event:', event)
-  }
-
-  #onMessageWs = ({ data }) => {
-    const { event, payload } = JSON.parse(data)
-
-    this.#eventHandlers[event] && this.#eventHandlers[event](payload)
-  }
-
-  #eventHandlers = {
-    UsersList: (usersList) => this.#handleUsersList(usersList),
-    Chat: (chat) => this.#handleChat(chat),
-  }
-
-  #handleUsersList = (usersList) => {
+  #handleUsersList = ({ detail: { payload: usersList } }) => {
     if (!this.#users) {
       setTimeout(() => {
-        this.#fireLoadedUsers()
+        firesEvent('loadedUsers', this.#users)
       }, 0)
     }
 
@@ -55,13 +37,7 @@ export default class Chat {
     }
   }
 
-  #handleChat = (chat) => {
-    console.log('🚀 ~ message:', chat)
-  }
-
-  handleMessage = (message) => {
-    console.log('🚀 ~ message:', message)
-  }
+  #handleChat = (chat) => {}
 
   /**
    * Updates the users.
@@ -75,20 +51,24 @@ export default class Chat {
   }
 
   /**
-   * Handles the send username event.
+   * Handles the register user event.
    *
-   * @param {CustomEvent} event - The send username event.
+   * @param {CustomEvent} event - The register user event.
    * @return {void} No return value.
    */
-  #onSendUsername = ({ detail }) => {
-    this.#ws.send(JSON.stringify({ event: 'UserJoin', payload: detail }))
+  #handleRegisterUser = ({ detail: { payload: username } }) => {
+    this.#ws.send('UserJoin', username)
   }
 
-  #getLoadedUsers() {
-    return new CustomEvent('loadedUsers', { detail: this.#users })
-  }
-
-  #fireLoadedUsers() {
-    document.dispatchEvent(this.#getLoadedUsers())
+  /**
+   * Throws an error.
+   *
+   * @param {string} error - The error message.
+   * @return {void} No return value.
+   * @throws {Error} The error.
+   * @private
+   */
+  #throwError = (error) => {
+    throw new Error(error)
   }
 }

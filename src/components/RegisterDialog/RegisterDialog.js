@@ -1,4 +1,5 @@
 import RegisterDialogUI from './RegisterDialogUI'
+import firesEvent from '@/js/firesEvent'
 
 /**
  * A class for handling the register dialog.
@@ -61,6 +62,7 @@ export default class RegisterDialog {
   }
 
   #success = (username) => {
+    firesEvent('registerUser', username)
     this.#fireSendUsername(username)
     this.#ui.resetUsername()
     this.#ui.hideModal()
@@ -121,7 +123,7 @@ export default class RegisterDialog {
     return this.#ui.inputUserName.value.trim()
   }
 
-  #onLoadedUsers = ({ detail }) => {
-    this.#users = new Set(detail)
+  #onLoadedUsers = ({ detail: { payload: users } }) => {
+    this.#users = new Set(users)
   }
 }
