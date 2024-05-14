@@ -3,6 +3,12 @@ import getElement from '@/js/getElement'
 import RegisterForm from '../ui/RegisterForm/RegisterForm'
 import styles from './RegisterDialog.module.css'
 
+/**
+ * Class represents a register dialog UI
+ *
+ * @class RegisterDialogUI
+ * @extends {BaseUI}
+ */
 export default class RegisterDialogUI extends BaseUI {
   constructor(element) {
     super(element)

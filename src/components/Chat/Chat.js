@@ -1,6 +1,11 @@
 import ChatUI from './ChatUI'
 import firesEvent from '@/js/firesEvent'
 
+/**
+ * Class represents a Chat
+ *
+ * @class Chat
+ */
 export default class Chat {
   #ui
   #ws
@@ -15,21 +20,33 @@ export default class Chat {
     this.#init()
   }
 
+  /**
+   * Initializes the class.
+   */
   #init() {
     this.#ws.init()
     this.#addListeners()
   }
 
+  /**
+   * Adds event listeners.
+   *
+   * @return {void} No return value.
+   */
   #addListeners() {
     document.addEventListener('registerUser', this.#handleRegisterUser)
     document.addEventListener('loadedUserList', this.#handleUsersList)
   }
 
+  /**
+   * Handles the users list event.
+   *
+   * @param {CustomEvent} event - The users list event.
+   * @return {void} No return value.
+   */
   #handleUsersList = ({ detail: { payload: usersList } }) => {
     if (!this.#users) {
-      setTimeout(() => {
-        firesEvent('loadedUsers', this.#users)
-      }, 0)
+      setTimeout(() => firesEvent('loadedUsers', this.#users), 0)
     }
 
     if (!this.#users || usersList.length !== this.#users.length) {

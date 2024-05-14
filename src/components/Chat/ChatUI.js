@@ -4,6 +4,11 @@ import RegisterDialog from '../RegisterDialog/RegisterDialog'
 
 import styles from './Chat.module.css'
 
+/**
+ * Class represents a Chat UI
+ *
+ * @class ChatUI
+ */
 export default class ChatUI extends BaseUI {
   /**
    * Constructs a new instance of the class.
