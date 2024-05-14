@@ -36,6 +36,11 @@ export default class Chat {
   #addListeners() {
     document.addEventListener('registerUser', this.#handleRegisterUser)
     document.addEventListener('loadedUserList', this.#handleUsersList)
+    document.addEventListener('loadedChat', this.#handleChat)
+  }
+
+  #getPayload(event) {
+    return event.detail.payload
   }
 
   /**
@@ -44,7 +49,9 @@ export default class Chat {
    * @param {CustomEvent} event - The users list event.
    * @return {void} No return value.
    */
-  #handleUsersList = ({ detail: { payload: usersList } }) => {
+  #handleUsersList = (event) => {
+    const usersList = this.#getPayload(event)
+
     if (!this.#users) {
       setTimeout(() => firesEvent('loadedUsers', this.#users), 0)
     }
@@ -54,7 +61,17 @@ export default class Chat {
     }
   }
 
-  #handleChat = (chat) => {}
+  /**
+   * Handles the chat event.
+   *
+   * @param {CustomEvent} event - The chat event.
+   * @return {void} No return value.
+   */
+  #handleChat = (event) => {
+    const chat = this.#getPayload(event)
+
+    this.#ui.updateChat(chat)
+  }
 
   /**
    * Updates the users.

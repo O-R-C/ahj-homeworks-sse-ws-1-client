@@ -94,6 +94,7 @@ export default class ServerApi {
    *
    * @param {Array<string>} usersList - List of users
    * @private
+   * @fires 'loadedUserList'
    */
   #handleUsersList = (usersList) => {
     firesEvent('loadedUserList', usersList)
@@ -104,9 +105,10 @@ export default class ServerApi {
    *
    * @param {Object} chat - Chat message
    * @private
+   * @fires 'loadedChat'
    */
   #handleChat = (chat) => {
-    console.log('🚀 ~ message:', chat)
+    firesEvent('loadedChat', chat)
   }
 
   /**

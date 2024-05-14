@@ -55,6 +55,9 @@ export default class ChatUI extends BaseUI {
 
   updateUsers(users) {
     console.log('🚀 ~ users:', users)
-    console.log('🚀 ~ users:', Array.isArray(users))
+  }
+
+  updateChat(chat) {
+    console.log('🚀 ~ chat:', chat)
   }
 }
