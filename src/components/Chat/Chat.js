@@ -96,6 +96,7 @@ export default class Chat {
    * @param {string} message - The message to send.
    * @returns {void}
    * @memberof Chat
+   * @fires sendMessage
    */
   #sendMessage(message) {
     firesEvent('sendMessage', message)

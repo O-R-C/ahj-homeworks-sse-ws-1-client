@@ -13,6 +13,6 @@ export default class Message {
   constructor(message, username) {
     this.text = message
     this.username = username
-    this.timestamp = new Date()
+    this.timestamp = Date.now()
   }
 }
