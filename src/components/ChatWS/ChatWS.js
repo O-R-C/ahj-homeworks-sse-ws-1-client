@@ -16,7 +16,7 @@ export default class ChatWS {
     !ServerApi && this.#throwError('Server API is not provided')
 
     this.#ui = new ChatWSUI(element)
-    this.#ws = new ServerApi('ws://localhost:3000/chat')
+    this.#ws = new ServerApi('ws://localhost:10000/chat')
 
     this.#init()
   }
