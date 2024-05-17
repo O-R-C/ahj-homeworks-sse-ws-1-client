@@ -52,8 +52,8 @@ export default class ServerApi {
    *
    * @private
    */
-  #onOpen = () => {
-    return
+  #onOpen = (event) => {
+    console.log('🚀 ~ event:', event)
   }
 
   /**

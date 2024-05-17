@@ -9,6 +9,7 @@ import firesEvent from '@/js/firesEvent'
 export default class ChatWS {
   #ui
   #ws
+  #user = null
   #users = null
 
   constructor(element, ServerApi) {
@@ -26,6 +27,7 @@ export default class ChatWS {
   #init() {
     this.#ws.init()
     this.#addListeners()
+    !this.#user && this.#ui.showRegisterDialog()
   }
 
   /**
@@ -90,8 +92,10 @@ export default class ChatWS {
    * @param {CustomEvent} event - The register user event.
    * @return {void} No return value.
    */
-  #handleRegisterUser = ({ detail: { payload: username } }) => {
+  #handleRegisterUser = (event) => {
+    const username = this.#getPayload(event)
     this.#ws.send('UserJoin', username)
+    this.#user = username
   }
 
   /**

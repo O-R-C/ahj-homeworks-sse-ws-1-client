@@ -95,4 +95,9 @@ export default class RegisterDialogUI extends BaseUI {
     this.errorUserName.textContent = 'Пользователь с таким псевдонимом уже зарегистрирован'
     this.inputUserName.focus()
   }
+
+  showMaxLengthError() {
+    this.errorUserName.textContent = 'Максимальная длина псевдонима 15 символов'
+    this.inputUserName.focus()
+  }
 }

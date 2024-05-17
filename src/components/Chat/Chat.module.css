@@ -1,10 +1,21 @@
 @value values: '@css/variables.module.css';
 @value colorMain, colorSecondary, padding, radius, border, shadow from values;
 
-.user-list {
-  margin: 0;
+.chat {
+  height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: padding;
   padding: padding;
+}
+
+.input {
+  width: 100%;
+  padding: padding;
+
+  font-size: 1rem;
+
+  border: border;
+  border-radius: radius;
 }

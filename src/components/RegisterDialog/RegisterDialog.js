@@ -58,6 +58,11 @@ export default class RegisterDialog {
       return
     }
 
+    if (username.length > 15) {
+      this.#ui.showMaxLengthError()
+      return
+    }
+
     this.#success(username)
   }
 

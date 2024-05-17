@@ -1,12 +1,16 @@
 @value values: '@css/variables.module.css';
 @value colorMain, colorSecondary, padding, radius, border, shadow from values;
+@value doubleRadius: calc(radius * 2);
 
 .chat {
+  width: 1000px;
+  margin-inline: auto;
+
   display: flex;
-  flex-direction: column;
-  gap: padding;
   padding: padding;
   height: 100%;
+  min-height: 80vh;
+  max-height: 80vh;
   overflow-y: auto;
 }
 
@@ -16,4 +20,47 @@
   border: border;
   border-radius: radius;
   box-shadow: shadow;
+}
+
+.user-list-container {
+  flex: 0 0 250px;
+  height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  border-top: border;
+  border-left: border;
+  border-bottom: border;
+  border-top-left-radius: doubleRadius;
+  border-bottom-left-radius: doubleRadius;
+
+  position: relative;
+  top: padding;
+
+  align-self: start;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    background-color: #b7b7b7;
+  }
+}
+
+.chat-container {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: padding;
+  padding: padding;
+  min-height: 100%;
+  overflow-y: auto;
+
+  border: border;
+  border-radius: doubleRadius;
 }

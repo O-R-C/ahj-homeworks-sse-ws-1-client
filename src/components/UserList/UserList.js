@@ -2,6 +2,7 @@ import UserListUI from './UserListUI'
 
 export default class UserList {
   #ui
+
   constructor(element) {
     this.#ui = new UserListUI(element)
 
@@ -16,7 +17,7 @@ export default class UserList {
     document.addEventListener('loadedUserList', this.#onLoadedUserList)
   }
 
-  #onLoadedUserList = (event) => {
-    this.#ui.updateUsers(event.detail)
+  #onLoadedUserList = ({ detail: { payload: userList } }) => {
+    this.#ui.updateUsers(userList)
   }
 }

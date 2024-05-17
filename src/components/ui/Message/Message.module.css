@@ -1,0 +1,13 @@
+@value values: '@css/variables.module.css';
+@value padding from values;
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: calc(padding / 2);
+}
+
+.description {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}

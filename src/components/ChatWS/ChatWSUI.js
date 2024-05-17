@@ -1,5 +1,7 @@
 import BaseUI from '@/js/Classes/BaseUI'
 import getElement from '@/js/getElement'
+import Chat from '../Chat/Chat'
+import UserList from '../UserList/UserList'
 import RegisterDialog from '../RegisterDialog/RegisterDialog'
 
 import styles from './ChatWS.module.css'
@@ -25,7 +27,7 @@ export default class ChatWSUI extends BaseUI {
    * Initializes the class.
    */
   #init() {
-    this.showRegisterDialog()
+    this.#addElements()
   }
 
   /**
@@ -39,11 +41,25 @@ export default class ChatWSUI extends BaseUI {
       classes: styles.chat,
     })
 
-    this.registerDialog = new RegisterDialog(app)
+    this.userListContainer = getElement({
+      tag: 'div',
+      classes: styles['user-list-container'],
+    })
 
-    app.append()
+    this.chatContainer = getElement({
+      tag: 'div',
+      classes: styles['chat-container'],
+    })
+
+    app.append(this.userListContainer, this.chatContainer)
 
     return app
+  }
+
+  #addElements() {
+    this.registerDialog = new RegisterDialog(this.app)
+    this.userList = new UserList(this.userListContainer)
+    this.chat = new Chat(this.chatContainer)
   }
 
   /**

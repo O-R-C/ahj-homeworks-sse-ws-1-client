@@ -1,5 +1,5 @@
 import getElement from '@/js/getElement'
-import BaseUI from '@/js/BaseUI'
+import BaseUI from '@js/Classes/BaseUI'
 import UserItem from '@ui/UserItem/UserItem'
 import styles from './UserList.module.css'
 
