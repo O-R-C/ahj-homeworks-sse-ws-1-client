@@ -48,6 +48,8 @@ export default class ChatUI extends BaseUI {
     chat.forEach((message) => {
       this.messages.append(this.#createMessage(message))
     })
+
+    this.#scrollToBottom()
   }
 
   /**
@@ -77,6 +79,15 @@ export default class ChatUI extends BaseUI {
    * @param {Object} message - Message object
    */
   appendMessage(message) {
-    this.messages.append(this.#createMessage(message))
+    const messageElement = this.#createMessage(message)
+    this.messages.append(messageElement)
+    messageElement.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  /**
+   * Scrolls to the bottom of the chat
+   */
+  #scrollToBottom() {
+    this.messages.scrollTop = this.messages.scrollHeight
   }
 }

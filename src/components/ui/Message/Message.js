@@ -11,7 +11,8 @@ import styles from './Message.module.css'
  * @return {HTMLElement} The created message element.
  */
 export const Message = ({ username, timestamp, text }) => {
-  const messageElement = getElement({ tag: 'div', classes: styles['message'] })
+  const messageElement = getElement({ tag: 'div', classes: [styles.message] })
+  username === 'You' && messageElement.classList.add(styles.you)
 
   const description = `${username}, ${moment(timestamp).format('HH:mm DD.MM.YYYY')}`
   const descriptionElement = getElement({

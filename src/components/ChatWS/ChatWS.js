@@ -1,4 +1,3 @@
-import Message from '@/js/Classes/Message'
 import ChatWSUI from './ChatWSUI'
 import firesEvent from '@/js/firesEvent'
 
@@ -56,12 +55,9 @@ export default class ChatWS {
   #handleUsersList = (event) => {
     const usersList = this.#getPayload(event)
 
-    if (!this.#users) {
-      setTimeout(() => firesEvent('loadedUsers', this.#users), 0)
-    }
-
     if (!this.#users || usersList.length !== this.#users.length) {
       this.#updateUsers(usersList)
+      setTimeout(() => firesEvent('loadedUsers', this.#users), 0)
     }
   }
 
@@ -102,7 +98,7 @@ export default class ChatWS {
 
   #handleSendMessage = (event) => {
     const message = this.#getPayload(event)
-    this.#ws.send('Chat', new Message(message, this.#user))
+    this.#ws.send('Chat', { ...message, username: this.#user })
   }
 
   /**

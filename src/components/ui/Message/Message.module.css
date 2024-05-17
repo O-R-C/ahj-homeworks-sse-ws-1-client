@@ -2,9 +2,20 @@
 @value padding from values;
 
 .message {
+  width: 70%;
   display: flex;
   flex-direction: column;
   gap: calc(padding / 2);
+}
+
+.you {
+  align-self: flex-end;
+  margin-right: padding;
+  text-align: right;
+
+  & .description {
+    color: red;
+  }
 }
 
 .description {

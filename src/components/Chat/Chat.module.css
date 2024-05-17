@@ -16,6 +16,17 @@
   gap: padding;
   height: 100%;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  &::-webkit-scrollbar-track {
+    background: inherit;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    background-color: #b7b7b7;
+  }
 }
 
 .input {

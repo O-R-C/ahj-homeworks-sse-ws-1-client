@@ -1,3 +1,4 @@
+import Message from '@/js/Classes/Message.js'
 import ChatUI from './ChatUI.js'
 import firesEvent from '@/js/firesEvent.js'
 
@@ -99,6 +100,8 @@ export default class Chat {
    * @fires sendMessage
    */
   #sendMessage(message) {
-    firesEvent('sendMessage', message)
+    const newMessage = new Message(message, 'You')
+    this.#ui.appendMessage(newMessage)
+    firesEvent('sendMessage', newMessage)
   }
 }
