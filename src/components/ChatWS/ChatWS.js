@@ -1,3 +1,4 @@
+import Message from '@/js/Classes/Message'
 import ChatWSUI from './ChatWSUI'
 import firesEvent from '@/js/firesEvent'
 
@@ -39,6 +40,7 @@ export default class ChatWS {
     document.addEventListener('registerUser', this.#handleRegisterUser)
     document.addEventListener('loadedUserList', this.#handleUsersList)
     document.addEventListener('loadedChat', this.#handleChat)
+    document.addEventListener('sendMessage', this.#handleSendMessage)
   }
 
   #getPayload(event) {
@@ -96,6 +98,11 @@ export default class ChatWS {
     const username = this.#getPayload(event)
     this.#ws.send('UserJoin', username)
     this.#user = username
+  }
+
+  #handleSendMessage = (event) => {
+    const message = this.#getPayload(event)
+    this.#ws.send('Chat', new Message(message, this.#user))
   }
 
   /**

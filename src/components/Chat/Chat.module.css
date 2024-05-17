@@ -10,6 +10,14 @@
   padding: padding;
 }
 
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: padding;
+  height: 100%;
+  overflow-y: auto;
+}
+
 .input {
   width: 100%;
   padding: padding;

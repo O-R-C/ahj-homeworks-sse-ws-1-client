@@ -87,6 +87,7 @@ export default class ServerApi {
   #eventHandlers = {
     UsersList: (usersList) => this.#handleUsersList(usersList),
     Chat: (chat) => this.#handleChat(chat),
+    Message: (message) => this.#handleMessage(message),
   }
 
   /**
@@ -109,6 +110,17 @@ export default class ServerApi {
    */
   #handleChat = (chat) => {
     firesEvent('loadedChat', chat)
+  }
+
+  /**
+   * Handles the 'Message' event
+   *
+   * @param {Object} message - Message
+   * @private
+   * @fires 'loadedMessage'
+   */
+  #handleMessage = (message) => {
+    firesEvent('loadedMessage', message)
   }
 
   /**

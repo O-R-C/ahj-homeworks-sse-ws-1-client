@@ -56,6 +56,9 @@ export default class ChatWSUI extends BaseUI {
     return app
   }
 
+  /**
+   * Adds elements to the app.
+   */
   #addElements() {
     this.registerDialog = new RegisterDialog(this.app)
     this.userList = new UserList(this.userListContainer)
