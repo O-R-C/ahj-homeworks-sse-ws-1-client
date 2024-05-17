@@ -38,7 +38,6 @@ export default class ChatWS {
   #addListeners() {
     document.addEventListener('registerUser', this.#handleRegisterUser)
     document.addEventListener('loadedUserList', this.#handleUsersList)
-    document.addEventListener('loadedChat', this.#handleChat)
     document.addEventListener('sendMessage', this.#handleSendMessage)
   }
 
@@ -62,18 +61,6 @@ export default class ChatWS {
   }
 
   /**
-   * Handles the chat event.
-   *
-   * @param {CustomEvent} event - The chat event.
-   * @return {void} No return value.
-   */
-  #handleChat = (event) => {
-    const chat = this.#getPayload(event)
-
-    this.#ui.updateChat(chat)
-  }
-
-  /**
    * Updates the users.
    *
    * @param {string[]} users - The new users.
@@ -81,7 +68,6 @@ export default class ChatWS {
    */
   #updateUsers(users) {
     this.#users = users
-    this.#ui.updateUsers(this.#users)
   }
 
   /**
@@ -94,8 +80,15 @@ export default class ChatWS {
     const username = this.#getPayload(event)
     this.#ws.send('UserJoin', username)
     this.#user = username
+    firesEvent('setCurrentUser', this.#user)
   }
 
+  /**
+   * Handles the send message event.
+   *
+   * @param {CustomEvent} event - The send message event.
+   * @return {void} No return value.
+   */
   #handleSendMessage = (event) => {
     const message = this.#getPayload(event)
     this.#ws.send('Chat', { ...message, username: this.#user })

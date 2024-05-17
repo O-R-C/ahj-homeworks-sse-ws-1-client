@@ -3,15 +3,18 @@ import BaseUI from '@js/Classes/BaseUI'
 import UserItem from '@ui/UserItem/UserItem'
 import styles from './UserList.module.css'
 
+/**
+ * Class represents a User List UI
+ *
+ * @class UserListUI
+ * @extends {BaseUI}
+ */
 export default class UserListUI extends BaseUI {
-  constructor(element) {
-    super(element)
-
-    this.#init()
-  }
-
-  #init() {}
-
+  /**
+   * Creates the User List app
+   *
+   * @returns {HTMLElement} - The created app
+   */
   createApp() {
     const app = getElement({
       tag: 'ul',
@@ -21,6 +24,11 @@ export default class UserListUI extends BaseUI {
     return app
   }
 
+  /**
+   * Updates the User List UI with the given users
+   *
+   * @param {string[]} users - The users to update the UI with
+   */
   updateUsers(users) {
     this.#clearUsers()
 
@@ -29,6 +37,15 @@ export default class UserListUI extends BaseUI {
     })
   }
 
+  addCurrentUser() {
+    this.app.append(UserItem('You'))
+  }
+
+  /**
+   * Clears the User List UI
+   *
+   * @private
+   */
   #clearUsers() {
     this.app.innerHTML = ''
   }

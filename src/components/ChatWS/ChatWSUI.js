@@ -71,12 +71,4 @@ export default class ChatWSUI extends BaseUI {
   showRegisterDialog() {
     this.registerDialog.showModal()
   }
-
-  updateUsers(users) {
-    console.log('🚀 ~ users:', users)
-  }
-
-  updateChat(chat) {
-    console.log('🚀 ~ chat:', chat)
-  }
 }

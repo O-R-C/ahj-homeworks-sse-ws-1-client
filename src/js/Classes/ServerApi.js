@@ -8,6 +8,7 @@ import firesEvent from '@/js/firesEvent'
 export default class ServerApi {
   #ws
   #url
+
   /**
    * Constructor
    *
@@ -52,8 +53,8 @@ export default class ServerApi {
    *
    * @private
    */
-  #onOpen = (event) => {
-    console.log('🚀 ~ event:', event)
+  #onOpen = () => {
+    firesEvent('connected', '')
   }
 
   /**
@@ -62,8 +63,10 @@ export default class ServerApi {
    * @param {Event} event - The WebSocket 'close' event
    * @private
    */
-  #onClose = (event) => {
-    console.log('🚀 ~ event:', event)
+  #onClose = () => {
+    firesEvent('disconnected', '')
+    firesEvent('loadedUserList', [])
+    firesEvent('loadedChat', [])
   }
 
   /**
